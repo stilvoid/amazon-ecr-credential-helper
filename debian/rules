@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+
+export DH_OPTIONS
+
+export DH_GOPKG := github.com/awslabs/amazon-ecr-credential-helper
+
+%:
+	echo $@
+	dh $@ --buildsystem=golang --with=golang

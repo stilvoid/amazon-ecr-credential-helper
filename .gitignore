@@ -1,1 +1,8 @@
 /bin/
+/obj-*linux-gnu/
+*.tar.gz
+*.tar.xz
+*.dsc
+*.changes
+*.deb
+*.buildinfo

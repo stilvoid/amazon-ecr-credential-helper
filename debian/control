@@ -1,0 +1,27 @@
+Source: amazon-ecr-credential-helper
+# Section
+Priority: extra
+Maintainer: Samuel Karp <skarp@amazon.com>
+Build-Depends:
+ debhelper (>= 8.0.0),
+ dh-golang (>= 1.1),
+# golang-1.10-go,
+ golang-go (>= 1.9),
+# more
+ golang-github-aws-aws-sdk-go-dev,
+ golang-github-docker-docker-credential-helpers-dev,
+ golang-github-mitchellh-go-homedir-dev,
+ golang-github-sirupsen-logrus-dev,
+ golang-github-golang-mock-dev
+Standards-Version: 3.9.2
+Vcs-Browser: https://github.com/awslabs/amazon-ecr-credential-helper
+Vcs-Git: https://github.com/awslabs/amazon-ecr-credential-helper
+
+Package: amazon-ecr-credential-helper
+Architecture: any
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Amazon ECR Credential Helper for Docker
+ A Docker credential helper to automatically manage credentials for Amazon ECR
+

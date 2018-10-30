@@ -65,6 +65,12 @@ $(WINDOWS_AMD64_BINARY): $(SOURCES)
 	./scripts/build_variant.sh windows amd64 $(VERSION) $(GITCOMMIT_SHA)
 	@mv ./bin/windows-amd64/$(BINARY_NAME) ./$(WINDOWS_AMD64_BINARY)
 
+.PHONY: docker-deb
+docker-deb:
+	docker run --rm \
+		-v '$(shell pwd)':/sources \
+		$(shell docker build --network=host -f debian/Dockerfile -q .)
+
 .PHONY: gogenerate
 gogenerate:
 	./scripts/gogenerate
