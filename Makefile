@@ -84,4 +84,7 @@ get-deps:
 
 .PHONY: clean
 clean:
-	rm -rf ./bin ||:
+	- rm -rf ./bin
+	- rm -rf ./obj-*-linux-gnu
+	- rm -rf ./debian/amazon-ecr-credential-helper
+	- rm -f ./amazon-ecr-credential-helper_*

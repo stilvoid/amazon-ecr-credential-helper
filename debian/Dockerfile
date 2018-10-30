@@ -5,6 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true update && 
       debhelper \
       dh-golang \
       golang-go \
+      git \
       golang-github-aws-aws-sdk-go-dev \
       golang-github-docker-docker-credential-helpers-dev \
       golang-github-mitchellh-go-homedir-dev \
