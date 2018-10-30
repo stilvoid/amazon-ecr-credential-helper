@@ -6,14 +6,16 @@ export DH_OPTIONS
 
 export DH_GOPKG := github.com/awslabs/amazon-ecr-credential-helper
 
+VERSION := $(shell cat VERSION)
+GITCOMMIT_SHA := $(shell git rev-parse --short HEAD)
+package_root := "github.com/awslabs/amazon-ecr-credential-helper/ecr-login"
+
 %:
 	dh $@ --buildsystem=golang --with=golang
 
 override_dh_auto_build:
-	dh_auto_build
-	GOPATH=$(shell pwd)/obj-$(DEB_HOST_GNU_TYPE) make
+	dh_auto_build -- -ldflags "-X $(package_root)/version.Version=$(VERSION) -X $(package_root)/version.GitCommitSHA=$(GITCOMMIT_SHA)"
+	mkdir -p bin/local
+	cp obj-$(DEB_HOST_GNU_TYPE)/bin/docker-credential-ecr-login bin/local
 
 override_dh_auto_install:
-	echo "*******************"
-	pwd
-	ls -l
