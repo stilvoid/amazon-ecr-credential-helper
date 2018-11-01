@@ -1,6 +1,6 @@
 Source: amazon-ecr-credential-helper
-# Section
-Priority: extra
+Section: misc
+Priority: optional
 Maintainer: Samuel Karp <skarp@amazon.com>
 Build-Depends:
  debhelper (>= 8.0.0),
