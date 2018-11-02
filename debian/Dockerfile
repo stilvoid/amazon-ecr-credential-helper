@@ -10,7 +10,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true update && 
       golang-github-docker-docker-credential-helpers-dev \
       golang-github-mitchellh-go-homedir-dev \
       golang-github-sirupsen-logrus-dev \
-      golang-github-golang-mock-dev
+      golang-github-golang-mock-dev \
+      golang-github-pkg-errors-dev
 
 WORKDIR /sources
 
