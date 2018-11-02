@@ -87,4 +87,6 @@ clean:
 	- rm -rf ./bin
 	- rm -rf ./obj-*-linux-gnu
 	- rm -rf ./debian/amazon-ecr-credential-helper
+	- rm -rf ./debian/.debhelper
+	- rm -rf ./debian/files
 	- rm -f ./amazon-ecr-credential-helper_*
