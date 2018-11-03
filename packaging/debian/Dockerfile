@@ -13,6 +13,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true update && 
       golang-github-golang-mock-dev \
       golang-github-pkg-errors-dev
 
-WORKDIR /sources
+WORKDIR /sources/amazon-ecr-credential-helper
 
 CMD ["sh", "-c", "dpkg-buildpackage -uc -us && cp ../amazon-ecr-credential-helper_* ."]

@@ -65,11 +65,21 @@ $(WINDOWS_AMD64_BINARY): $(SOURCES)
 	./scripts/build_variant.sh windows amd64 $(VERSION) $(GITCOMMIT_SHA)
 	@mv ./bin/windows-amd64/$(BINARY_NAME) ./$(WINDOWS_AMD64_BINARY)
 
+.PHONY: deb-src
+deb-src: packaging/debian/amazon-ecr-credential-helper_${VERSION}.orig.tar.gz
+packaging/debian/amazon-ecr-credential-helper_${VERSION}.orig.tar.gz: GITCOMMIT_SHA
+	tar -cf ./packaging/debian/amazon-ecr-credential-helper_${VERSION}.orig.tar ecr-login scripts VERSION GITCOMMIT_SHA doc
+	tar --delete -f ./packaging/debian/amazon-ecr-credential-helper_${VERSION}.orig.tar ecr-login/vendor
+	gzip ./packaging/debian/amazon-ecr-credential-helper_${VERSION}.orig.tar
+
+GITCOMMIT_SHA:
+	echo $(GITCOMMIT_SHA) > GITCOMMIT_SHA
+
 .PHONY: docker-deb
-docker-deb:
+docker-deb: deb-src
 	docker run --rm \
-		-v '$(shell pwd)':/sources \
-		$(shell docker build --network=host -f debian/Dockerfile -q .)
+		-v '$(shell pwd)/packaging/debian':/sources \
+		$(shell docker build --network=host -f packaging/debian/Dockerfile -q .)
 
 .PHONY: gogenerate
 gogenerate:

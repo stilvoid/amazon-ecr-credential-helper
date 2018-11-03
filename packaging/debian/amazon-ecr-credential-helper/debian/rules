@@ -7,7 +7,7 @@ export DH_OPTIONS
 export DH_GOPKG := github.com/awslabs/amazon-ecr-credential-helper
 
 VERSION := $(shell cat VERSION)
-GITCOMMIT_SHA := $(shell git rev-parse --short HEAD)
+GITCOMMIT_SHA := $(shell cat GITCOMMIT_SHA)
 package_root := "github.com/awslabs/amazon-ecr-credential-helper/ecr-login"
 
 %:

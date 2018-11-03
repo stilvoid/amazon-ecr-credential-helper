@@ -6,3 +6,4 @@
 *.changes
 *.deb
 *.buildinfo
+GITCOMMIT_SHA

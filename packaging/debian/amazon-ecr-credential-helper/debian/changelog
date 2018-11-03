@@ -1,4 +1,4 @@
-amazon-ecr-credential-helper (0.1.0) unstable; urgency=low
+amazon-ecr-credential-helper (0.1.0-0) unstable; urgency=low
 
   * Initial release
 
