@@ -4,6 +4,7 @@ phases:
   install:
     commands:
       - echo $CODEBUILD_RESOLVED_SOURCE_REVISION > GITCOMMIT_SHA
+      - cat GITCOMMIT_SHA
       - chmod +x -R scripts
       - ./scripts/hack/symlink-gopath-codebuild.sh
       - cd /go/src/github.com/awslabs/amazon-ecr-credential-helper
