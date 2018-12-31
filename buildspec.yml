@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo $CODEBUILD_RESOLVED_SOURCE_REVISION > GITCOMMIT_SHA
+      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION > GITCOMMIT_SHA
       - cat GITCOMMIT_SHA
       - chmod +x -R scripts
       - ./scripts/hack/symlink-gopath-codebuild.sh
