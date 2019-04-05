@@ -4,31 +4,52 @@ summary: Amazon ECR Credential Helper for Docker
 description: |
   A Docker helper to automatically manage credentials for Amazon ECR.
 
-grade: devel # must be 'stable' to release into candidate/stable channels
-#confinement: devmode # use 'strict' once you have the right plugs and slots
-confinement: classic
+license: Apache-2.0
 
-apps:
-  docker-credential-ecr-login:
-    command: docker-credential-ecr-login
-#    plugs:
-#      - home
-#      - network
+base: core18
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+plugs:
+  personal-files:
+    read:
+      - $HOME/.aws
+    write:
+      - $HOME/.ecr
 
 parts:
+  launchers:
+    plugin: dump
+    source: snap/local/launchers
+    organize:
+      "*": bin/
+
   docker-credential-ecr-login:
+    build-packages:
+      - git
+      - make
+      - gcc
     source: .
     plugin: go
     go-importpath: github.com/awslabs/amazon-ecr-credential-helper
-    override-build: |
-      BUILDDIR=$(pwd)
-      INSTALLDIR=${BUILDDIR}/../install
-      export GOPATH=$(pwd)/../go
-      cd ../go/src/github.com/awslabs/amazon-ecr-credential-helper
-      make
-      cp bin/local/docker-credential-ecr-login $INSTALLDIR
-      mkdir -p $INSTALLDIR/usr/share/doc/docker-credential-ecr-login
-      cp LICENSE NOTICE THIRD-PARTY-LICENSES $INSTALLDIR/usr/share/doc/docker-credential-ecr-login
-      gzip --keep --force docs/docker-credential-ecr-login.1
-      mkdir -p $INSTALLDIR/usr/share/man/man1
-      cp docs/docker-credential-ecr-login.1.gz $INSTALLDIR/usr/share/man/man1
+        #override-build: make
+    #override-build: |
+    #  BUILDDIR=$(pwd)
+    #  INSTALLDIR=${BUILDDIR}/../install
+    #  export GOPATH=$(pwd)/../go
+    #  cd ../go/src/github.com/awslabs/amazon-ecr-credential-helper
+    #  make
+    #  cp bin/local/docker-credential-ecr-login $INSTALLDIR
+    #  mkdir -p $INSTALLDIR/usr/share/doc/docker-credential-ecr-login
+    #  cp LICENSE NOTICE THIRD-PARTY-LICENSES $INSTALLDIR/usr/share/doc/docker-credential-ecr-login
+    #  gzip --keep --force docs/docker-credential-ecr-login.1
+    #  mkdir -p $INSTALLDIR/usr/share/man/man1
+    #  cp docs/docker-credential-ecr-login.1.gz $INSTALLDIR/usr/share/man/man1
+
+apps:
+  docker-credential-ecr-login:
+    #adapter: full
+    #command-chain:
+    #  - bin/launcher.sh
+    command: bin/docker-credential-ecr-login
